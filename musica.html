@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor de Música</title>
+    <style>
+        .audio-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background-color: #ff5722;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .play-button:hover {
+            background-color: #e64a19;
+        }
+
+        .play-button i {
+            color: white;
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="audio-container">
+        <button class="play-button" id="playPauseButton">
+            <i id="icon" class="fas fa-play"></i>
+        </button>
+        <audio id="audio" autoplay muted>
+            <source src="https://drive.google.com/uc?export=download&id=1j1YNaoXEOa74LH90idJYzgN8k-RgQJte" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        const audio = document.getElementById("audio");
+        const playPauseButton = document.getElementById("playPauseButton");
+        const icon = document.getElementById("icon");
+
+        // Espera a que el usuario interactúe con la página para activar el sonido
+        document.addEventListener("DOMContentLoaded", () => {
+            setTimeout(() => {
+                audio.muted = false; // Activa el sonido después de la carga
+                audio.play(); // Asegura la reproducción automática
+            }, 1000); // Espera 1 segundo para evitar bloqueos del navegador
+        });
+
+        playPauseButton.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play();
+                icon.classList.remove("fa-play");
+                icon.classList.add("fa-pause");
+            } else {
+                audio.pause();
+                icon.classList.remove("fa-pause");
+                icon.classList.add("fa-play");
+            }
+        });
+    </script>
+
+    <!-- Carga de iconos Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"></script>
+</body>
+</html>
