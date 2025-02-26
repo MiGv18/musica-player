@@ -5,19 +5,22 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const audio = document.getElementById("audio");
-        
-        // Intenta reproducir automáticamente
+
+        // Intenta reproducir automáticamente en mute
         audio.play().then(() => {
-            audio.muted = false; // Desmutear si se permite el autoplay
+            console.log("Autoplay permitido en mute.");
         }).catch(error => {
             console.log("Autoplay bloqueado. Esperando interacción del usuario.");
         });
     });
 
-    // Si el autoplay es bloqueado, activamos el audio tras un clic
+    // Si el autoplay es bloqueado, activa el audio en cualquier parte de la página (no solo en el iframe)
     document.addEventListener("click", () => {
         const audio = document.getElementById("audio");
-        audio.muted = false;
-        audio.play();
-    }, { once: true }); // Solo ejecuta la acción una vez
+        if (audio.muted) {
+            audio.muted = false;
+            audio.play();
+            console.log("Audio activado después del clic.");
+        }
+    }, { once: true }); // Solo se ejecuta una vez
 </script>
