@@ -1,26 +1,24 @@
-<audio id="audio" autoplay muted loop>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reproductor de Audio</title>
+</head>
+<body>
+  <audio id="audio" muted loop>
     <source src="https://raw.githubusercontent.com/MiGv18/musica-player/main/Taylor%20Swift%20-%20Bejeweled%20(Official%20Music%20Video).mp3" type="audio/mpeg">
-</audio>
+  </audio>
 
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
+  <script>
+    window.addEventListener("message", (event) => {
+      if (event.data === "playAudio") {
         const audio = document.getElementById("audio");
-
-        // Intenta reproducir automáticamente en mute
-        audio.play().then(() => {
-            console.log("Autoplay permitido en mute.");
-        }).catch(error => {
-            console.log("Autoplay bloqueado. Esperando interacción del usuario.");
-        });
+        audio.muted = false;
+        audio.play();
+      }
     });
+  </script>
+</body>
+</html>
 
-    // Si el autoplay es bloqueado, activa el audio en cualquier parte de la página (no solo en el iframe)
-    document.addEventListener("click", () => {
-        const audio = document.getElementById("audio");
-        if (audio.muted) {
-            audio.muted = false;
-            audio.play();
-            console.log("Audio activado después del clic.");
-        }
-    }, { once: true }); // Solo se ejecuta una vez
-</script>
