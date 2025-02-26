@@ -1,12 +1,23 @@
-<audio id="audio" autoplay>
+<audio id="audio" autoplay muted loop>
     <source src="https://raw.githubusercontent.com/MiGv18/musica-player/main/Taylor%20Swift%20-%20Bejeweled%20(Official%20Music%20Video).mp3" type="audio/mpeg">
 </audio>
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         const audio = document.getElementById("audio");
-        audio.play().catch(error => {
+        
+        // Intenta reproducir automáticamente
+        audio.play().then(() => {
+            audio.muted = false; // Desmutear si se permite el autoplay
+        }).catch(error => {
             console.log("Autoplay bloqueado. Esperando interacción del usuario.");
         });
     });
+
+    // Si el autoplay es bloqueado, activamos el audio tras un clic
+    document.addEventListener("click", () => {
+        const audio = document.getElementById("audio");
+        audio.muted = false;
+        audio.play();
+    }, { once: true }); // Solo ejecuta la acción una vez
 </script>
