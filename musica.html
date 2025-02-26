@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reproductor de Audio</title>
+  <title>Reproductor de Música</title>
 </head>
 <body>
   <audio id="audio" muted loop>
@@ -11,9 +11,9 @@
   </audio>
 
   <script>
-    window.addEventListener("message", (event) => {
+    window.addEventListener("message", function(event) {
       if (event.data === "playAudio") {
-        const audio = document.getElementById("audio");
+        var audio = document.getElementById("audio");
         audio.muted = false;
         audio.play();
       }
@@ -21,4 +21,3 @@
   </script>
 </body>
 </html>
-
